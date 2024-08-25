@@ -19,14 +19,22 @@ void print(char **playground)
 {
     fflush(stdout);
     system("clear");
-    printf("\n\t* Tic-Tac-Toe *\n\n");
+    printf("\n\t\033[1;34m\033[1m* Tic-Tac-Toe *\033[0m \033[0m\n\n");
     printf("\t-------------\n");
     for (int i = 0; i < 3; i++)
     {
         printf("\t");
         for (int j = 0; j < 3; j++)
         {
-            printf("| %c ", playground[i][j]);
+            if(playground[i][j]== 'X' || playground[i][j]== 'O'){
+                char color = '2';
+                if(playground[i][j]== 'X')  color = '1';
+                printf("|\033[3%cm \033[1m%c\033[0m \033[0m",color, playground[i][j]);
+            }
+            else{
+                printf("| %c ", playground[i][j]);
+            }
+            
         }
         printf("|\n\t-------------\n");
     }
@@ -170,7 +178,9 @@ void play_game(char** playground)
             int res = result(playground, player);
             if (res)
             {
-                printf("Winner is %c ! \n", player);
+                char color = '2';
+                if(player == 'X')   color = '1';
+                printf("\033[3%cm \033[1m Winner is %c ! \033[0m \033[0m\n",color, player);
                 break;
             }
             else if (play == 0)
